@@ -5,9 +5,7 @@ from cars import views
 
 
 router = DefaultRouter()
-router.register('make', views.CarViewSet)
-
-app_name = 'cars'
+router.register('', views.CarViewSet)
 
 urlpatterns = [
     path('', include(router.urls))
