@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 
 class Car(models.Model):
@@ -12,3 +13,11 @@ class Car(models.Model):
 
     def __str__(self):
         return self.make
+
+
+class Rate(models.Model):
+    """
+    Rate to be used for car objects
+    """
+    car = models.ForeignKey('Car', on_delete=models.CASCADE)
+    rate = models.PositiveIntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)])
