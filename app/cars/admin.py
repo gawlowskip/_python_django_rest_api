@@ -1,3 +1,11 @@
 from django.contrib import admin
 
-# Register your models here.
+from core.models import Car
+
+
+class CarAdmin(admin.ModelAdmin):
+    ordering = ['id']
+    list_display = ['make', 'model', 'created_at', 'updated_at']
+
+
+admin.site.register(Car, CarAdmin)
