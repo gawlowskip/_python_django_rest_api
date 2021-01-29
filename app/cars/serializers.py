@@ -1,5 +1,6 @@
 import requests
 import logging
+from requests.utils import requote_uri
 from rest_framework import serializers
 
 from core.models import Car
@@ -17,14 +18,18 @@ class CarSerializer(serializers.ModelSerializer):
         """
         Check that the make and model are valid
         """
-        response = requests.get(f"https://vpic.nhtsa.dot.gov/api/vehicles/getmodelsformake/{attrs.get('make').upper()}?format=json")
+        make = attrs.get('make').upper()
+        model = attrs.get('model').upper()
+        url = requote_uri(f"https://vpic.nhtsa.dot.gov/api/vehicles/getmodelsformake/{make}?format=json")
+
+        response = requests.get(url)
         results = response.json().get('Results')
 
-        if not results:
+        cars = [car for car in results if car['Make_Name'].upper() == make]
+        if not cars:
             raise serializers.ValidationError("Car make is invalid")
 
-        model = [car for car in results if car['Model_Name'] == attrs.get('model')]
-
+        model = [car for car in results if car['Model_Name'].upper() == model]
         if not model:
             raise serializers.ValidationError("Car model is invalid")
 
