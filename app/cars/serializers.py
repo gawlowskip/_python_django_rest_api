@@ -1,5 +1,5 @@
 import requests
-import logging
+
 from requests.utils import requote_uri
 from rest_framework import serializers
 
