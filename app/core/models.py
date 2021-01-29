@@ -11,4 +11,4 @@ class Car(models.Model):
     updated_at = models.DateTimeField(auto_now_add=True, blank=True)
 
     def __str__(self):
-        return self.name
+        return self.make
