@@ -7,7 +7,7 @@ from core.models import Car
 
 
 class CarSerializer(serializers.ModelSerializer):
-    """Serializer for tag object"""
+    """Serializer for car object"""
 
     class Meta:
         model = Car
