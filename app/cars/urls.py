@@ -6,6 +6,7 @@ from cars import views
 
 router = DefaultRouter()
 router.register('', views.CarViewSet)
+router.register('/popular', views.PopularCarViewSet)
 
 urlpatterns = [
     path('', include(router.urls))
