@@ -19,3 +19,13 @@ class CarViewSet(viewsets.GenericViewSet, mixins.ListModelMixin, mixins.CreateMo
     def perform_create(self, serializer):
         """Create new car"""
         serializer.save()
+
+
+class PopularCarViewSet(viewsets.GenericViewSet, mixins.ListModelMixin, mixins.CreateModelMixin):
+    """Show popular cars"""
+    queryset = Car.objects.all()
+    serializer_class = serializers.CarSerializer
+
+    def get_queryset(self):
+        """Get all popular cars"""
+        return self.queryset.order_by('id').annotate(rating=Coalesce(Avg(F('rate__rate')), Value(0)))
