@@ -8,6 +8,7 @@ from core.models import Car
 
 class CarSerializer(serializers.ModelSerializer):
     """Serializer for car object"""
+    avg_rating = serializers.FloatField(read_only=True)
 
     class Meta:
         model = Car
