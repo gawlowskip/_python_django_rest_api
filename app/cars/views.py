@@ -1,5 +1,6 @@
 from rest_framework import viewsets, mixins
-from django.db.models import Avg, F
+from django.db.models import Avg, F, Value
+from django.db.models.functions import Coalesce
 
 from core.models import Car
 
@@ -13,7 +14,7 @@ class CarViewSet(viewsets.GenericViewSet, mixins.ListModelMixin, mixins.CreateMo
 
     def get_queryset(self):
         """Get all cars"""
-        return self.queryset.order_by('id').annotate(rating=Avg(F('rate__rate')))
+        return self.queryset.order_by('id').annotate(rating=Coalesce(Avg(F('rate__rate')), Value(0)))
 
     def perform_create(self, serializer):
         """Create new car"""
