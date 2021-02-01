@@ -9,15 +9,12 @@ from core.models import Car
 class CarSerializer(serializers.ModelSerializer):
     """Serializer for car object"""
     rating = serializers.FloatField(read_only=True)
-    count_rating = serializers.SerializerMethodField()
+    count_rating = serializers.IntegerField(read_only=True)
 
     class Meta:
         model = Car
         fields = '__all__'
         read_only_Fields = ('id',)
-
-    def get_count_rating(self, obj):
-        return obj.rate_set.count()
 
     def validate(self, attrs):
         """
