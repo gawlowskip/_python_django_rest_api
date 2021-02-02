@@ -20,5 +20,6 @@ class Rate(models.Model):
     Rate to be used for car objects
     """
     car = models.ForeignKey('Car', on_delete=models.CASCADE)
-    rate = models.PositiveIntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)])
+    rate = models.PositiveIntegerField(validators=[MinValueValidator(1),
+                                                   MaxValueValidator(5)])
     created_at = models.DateTimeField(auto_now_add=True, blank=True)

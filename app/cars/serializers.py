@@ -22,7 +22,11 @@ class CarSerializer(serializers.ModelSerializer):
         """
         make = attrs.get('make').upper()
         model = attrs.get('model').upper()
-        url = requote_uri(f"https://vpic.nhtsa.dot.gov/api/vehicles/getmodelsformake/{make}?format=json")
+
+        base_uri = 'https://vpic.nhtsa.dot.gov/api/vehicles/getmodelsformake'
+        url = requote_uri(
+            f"{base_uri}/{make}?format=json"
+        )
 
         response = requests.get(url)
         results = response.json().get('Results')
