@@ -9,6 +9,24 @@ REST API that a basic cars makes and models database interacting with external A
 3) At least basic tests of endpoints and their functionality,
 4) Written application must be hosted and publicly available on Heroku.
 
+## Up and running
+
+### Build container
+
+> docker-compose build
+
+### Up container
+
+> docker-compose up
+
+### Migrate database tables
+
+> docker-compose run app sh -c "python manage.py migrate"
+
+### Run tests
+
+> docker-compose run app sh -c "python manage.py test & flake8”
+
 ## Endpoints 
 
 ### POST /cars
