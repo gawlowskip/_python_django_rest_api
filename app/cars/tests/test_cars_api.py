@@ -38,3 +38,14 @@ class PublicCarsApiTests(TestCase):
         ).exists()
         self.assertEqual(res.status_code, status.HTTP_201_CREATED)
         self.assertTrue(exists)
+
+    def test_create_car_invalid(self):
+        """Test creating a new car with invalid payload"""
+        payload = {'make': ''}
+        res = self.client.post(CARS_URL, payload)
+
+        exists = Car.objects.filter(
+            make=payload['make'],
+        ).exists()
+        self.assertEqual(res.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertFalse(exists)
