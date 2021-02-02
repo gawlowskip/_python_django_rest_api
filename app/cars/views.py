@@ -7,7 +7,9 @@ from core.models import Car
 from cars import serializers
 
 
-class CarViewSet(viewsets.GenericViewSet, mixins.ListModelMixin, mixins.CreateModelMixin):
+class CarViewSet(viewsets.GenericViewSet,
+                 mixins.ListModelMixin,
+                 mixins.CreateModelMixin):
     """Manage cars in the database"""
     queryset = Car.objects.all()
     serializer_class = serializers.CarSerializer
@@ -23,7 +25,9 @@ class CarViewSet(viewsets.GenericViewSet, mixins.ListModelMixin, mixins.CreateMo
         serializer.save()
 
 
-class PopularCarViewSet(viewsets.GenericViewSet, mixins.ListModelMixin, mixins.CreateModelMixin):
+class PopularCarViewSet(viewsets.GenericViewSet,
+                        mixins.ListModelMixin,
+                        mixins.CreateModelMixin):
     """Show popular cars"""
     queryset = Car.objects.all()
     serializer_class = serializers.CarSerializer

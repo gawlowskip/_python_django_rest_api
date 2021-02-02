@@ -5,7 +5,9 @@ from core.models import Rate
 from rates import serializers
 
 
-class RateViewSet(viewsets.GenericViewSet, mixins.ListModelMixin, mixins.CreateModelMixin):
+class RateViewSet(viewsets.GenericViewSet,
+                  mixins.ListModelMixin,
+                  mixins.CreateModelMixin):
     """Manage rates in the database"""
     queryset = Rate.objects.all()
     serializer_class = serializers.RateSerializer
